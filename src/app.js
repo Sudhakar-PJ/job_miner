@@ -62,7 +62,7 @@ const publicPath = path.join(__dirname, "../public");
 app.use(express.static(publicPath));
 
 // Catch-all route for React SPA
-app.get("(.*)", (req, res) => {
+app.get("/:path*", (req, res) => {
   if (req.path.startsWith("/api")) return res.status(404).json({ error: "API route not found" });
   res.sendFile(path.join(publicPath, "index.html"));
 });
