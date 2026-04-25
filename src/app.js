@@ -61,8 +61,8 @@ app.use("/api/jobs", jobRoutes);
 const publicPath = path.join(__dirname, "../public");
 app.use(express.static(publicPath));
 
-// Catch-all route for React SPA
-app.get("/:path*", (req, res) => {
+// Catch-all middleware for React SPA
+app.use((req, res) => {
   if (req.path.startsWith("/api")) return res.status(404).json({ error: "API route not found" });
   res.sendFile(path.join(publicPath, "index.html"));
 });
